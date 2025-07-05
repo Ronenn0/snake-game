@@ -1,0 +1,147 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+<link rel="stylesheet" href="style.css">
+<body>
+    <!--<div id="mainDiv">
+        <div id="first"></div>
+        <div id="second"></div>
+        <div id="third"></div>
+    </div>-->
+    <button id="showAdjustmentButtons_button" class="showAdjustmentButtons_button">+></button>
+    <div id="adjustmentButtons_container">
+        <input type="submit" id="toggleSizeAdjustmentDiv" value="toggle_size_box"
+            onclick="toggle_size_box()"/>
+        <input type="submit" id="toggleCustimizationsDiv" value="toggle_customizations_box"
+            onclick="toggle_customizations_box()"/>
+    </div>
+    
+    <div id="sizeAdjustmentDiv">
+        <div id="currentSizeDiv">
+            <span>Current size: </span>
+            <span id="currentSize"></span>
+        </div>
+        <div>
+            <span id="widthSpan">New width: </span>
+            <input type="text" id="width" placeholder="min: 255px, max: 900px."
+                oninput="width_Validation(this)"
+                , onfocusout="widthOnFocusOut(this, 255)"/>
+        </div>
+        <div>
+            <span id="heightSpan">New height: </span>
+            <input type="text" id="height" placeholder="min: 180px, max: 690px."
+                oninput="height_Validation(this)"
+                , onfocusout="heightOnFocusOut(this, 180)"/>
+        </div>
+        <input type="submit" id="adjustSizeButton" value="Adjust size"
+            onclick="adjustSize()"/>
+    </div>
+    <div id="customizationsDiv">
+        <div id="pageBackgroundColor">
+            <span id="pageBackgroundColorsSpan">Page background-colors:</span>
+            <input type="text" id="firstPageBackgroundColor" placeholder="First color - 6 digits"
+                oninput="ColorsValidation(this)"/>
+            <i class="fas fa-random" id="Icon_random"
+                    onclick="generateRandomHexColorForThisInput(document.getElementById('firstPageBackgroundColor'))"></i>
+            <input type="text" id="secondPageBackgroundColor" placeholder="Second color - 6 digits"
+                oninput="ColorsValidation(this)"/>
+            <i class="fas fa-random" id="Icon_random"
+                onclick="generateRandomHexColorForThisInput(document.getElementById('secondPageBackgroundColor'))"></i>
+        </div>
+        <div id="gameWindowDiv">
+            <span id="gameWindowsBackgroundColorsSpan">Game window's background colors:</span>
+            <input type="text" id="firstWindowBackgroundColor" placeholder="First color - 6 digits"
+                oninput="ColorsValidation(this)"/>
+            <i class="fas fa-random" id="Icon_random"
+                onclick="generateRandomHexColorForThisInput(document.getElementById('firstWindowBackgroundColor'))"></i>
+            <input type="text" id="secondWindowBackgroundColor" placeholder="Second color - 6 digits"
+                oninput="ColorsValidation(this)"/>
+            <i class="fas fa-random" id="Icon_random"
+                onclick="generateRandomHexColorForThisInput(document.getElementById('secondWindowBackgroundColor'))"></i>
+        </div>
+        <div id="headsColorDiv">
+            <span id="headNewBackgroundColorSpan">Head's color:</span>
+            <input type="text" id="headBackgroundColor" placeholder="6 digits."
+                oninput="ColorsValidation(this)"/>
+            <i class="fas fa-random" id="Icon_random"
+                onclick="generateRandomHexColorForThisInput(document.getElementById('headBackgroundColor'))"></i>
+        </div>
+        <div id="partsColorDiv">
+            <span id="partNewBackgroundColorSpan">Part's color:</span>
+            <input type="text" id="partBackgroundColor" placeholder="6 digits."
+                oninput="ColorsValidation(this)"/>
+            <i class="fas fa-random" id="Icon_random"
+                onclick="generateRandomHexColorForThisInput(document.getElementById('partBackgroundColor'))"></i>
+        </div>
+        <div id="dotsColorDiv">
+            <span id="dotNewBackgroundColorSpan">Dot's color:</span>
+            <input type="text" id="DotBackgroundColor" placeholder="6 digits."
+                oninput="ColorsValidation(this)"/>
+            <i class="fas fa-random" id="Icon_random"
+                onclick="generateRandomHexColorForThisInput(document.getElementById('DotBackgroundColor'))"></i>
+        </div>
+        <div id="Buttons">
+            <input type="submit" id="ApplyCustomizationsButton" value="Apply"
+                onclick="applyCustomizations()" />
+            <input type="submit" id="backToDefaultButton" value = "Default"
+                onclick="letEverythingBackToItsDefaultColor()"/>
+            <input type="submit" id="randomColorsGeneratorButton" value="Generate random colors"
+                onclick="generateRandomHexColorForAllColorInputs()"/>
+        </div>
+    </div>
+    <div id="scoreDiv">
+        <span id="scoreLabel">Score:</span>
+        <span id="score"></span>
+    </div>
+    <div id="main"></div>
+    <div id="losingDiv">
+        <div id="sizeDiv">
+            <span id="sizeSpan">Played at size:</span>
+            <span id="size"></span>
+        </div>
+        <div id="mainScore">
+            <span id="scoreSpan">Score:</span>
+            <span id="score_InLosingDiv"></span>
+        </div>
+        <div id="high">
+            <span id="highestScoreSpan">Highest score:</span>
+            <span id="highestScore"></span>
+        </div>
+        <input type="submit" id="restartButton" value="Restart"/>
+        <div id="losing_pausingDiv">
+            <div id="checkDiv"
+                onclick="enabling_Or_Disabling_pauses_checking(this)">
+                <div id="losing_Check_circle"></div>
+            </div>
+            <span>Enable pauses checker</span>
+        </div>
+    </div>
+    <div id="pauseDiv">
+        <div id="pause_ScoreInformations">
+            <span id="pause_CurrentScoreSpan">Current score:</span>
+            <span id="pause_CurrentScore"></span>
+        </div>
+        <input type="submit" id="pause_ResumeButton" value="Resume"
+            onclick="resume(); resumeMovement();"/>
+        <input type="submit" id="pause_RestartButton" value="Restart"
+            onclick="restart()" />
+            <div id="div1">
+                <div id="pause_pausesInformationsDiv">
+                    <span id="pause_pausingWarningSpan">Pauses used:</span>
+                    <span id="pause_pausesAmount">0</span>
+                </div>
+            </div>
+            <div id="div2">
+                <span id="pause_mainWarning">after one more pause the game will be restarted!</span>
+            </div>
+    </div>
+    <div id="restartingDiv">
+        <span>You've used the maximum amount of pauses allowed.. the game has been restarted.</span>
+    </div>
+</body>
+<script src="javascript.js" type="text/javascript"></script>
+</html>
